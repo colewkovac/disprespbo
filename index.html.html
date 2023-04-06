@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Copy text to clipboard by pressing letter keys</title>
+    <style>
+      .bullet {
+          margin-right: 10px;
+          font-weight: bold;
+          font-size: 35px;
+          color: black;
+      }
+      
+      #items {
+        font-size: 30px;
+        text-align: center;
+        background-color: transparent;
+      }
+      #items li {
+        color: black;
+        background-color: rgba(0, 0, 0, 0.75);
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        text-stroke: 2px black;
+      }
+      #video-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+      }
+      h1 {
+        text-align: center;
+        background-color: black;
+        font-size: 40px;
+        text-decoration: underline;
+      }
+      ul {
+        list-style-type: none;
+      }
+     
+      
+  </style>
+</head>
+<body>
+  <video id="video-bg" autoplay loop muted>
+    <source src="/videoplayback.mp4" type="video/mp4">
+</video>
+<h1>*Dispatch Response Board*</h1>
+ <ul class="back" id="items">
+        <li class="red"><span class="bullet">A.</span>Fix your gps.</li>
+        <li class="white"><span class="bullet">B.</span>Reset your tablet.</li>
+        <li class="red"><span class="bullet">C.</span>Send a no load.</li>
+        <li class="white"><span class="bullet">D.</span>You don't have an order.</li>
+        <li class="red"><span class="bullet">E.</span>You don't have a headup.</li>
+        <li class="white"><span class="bullet">F.</span>Contact school dispatch regarding school orders.</li>
+        <li class="red"><span class="bullet">G.</span>Contact management during office hours to get your points back.</li>
+        <li class="white"><span class="bullet">H.</span>Your customer is coming.</li>
+        <li class="red"><span class="bullet">I.</span>We are trying to find a cab for you, you will receive a text message with your cab number when we find one. Thank you for your patience.</li>
+        <li class="white"><span class="bullet">J.</span>Your customer cancelled the order.</li>
+        <li class="red"><span class="bullet">K.</span>Is someone on  for north?</li>
+        <li class="white"><span class="bullet">L.</span>Logged in have a good day!</li>
+        <li class="red"><span class="bullet">M.</span>Your customer is waiting for you.</li>
+        <li class="white"><span class="bullet">N.</span>Your customer did not answer the phone.</li>
+        <li class="red"><span class="bullet">O.</span>Go to the parking lot in order to register.</li>
+        <li class="white"><span class="bullet">P.</span>Your order was not placed at 6pm i can not add the surcharge sorry.</li>
+        <li class="red"><span class="bullet">Q.</span>Please be patient you will get an order.</li>
+        <li class="white"><span class="bullet">R.</span>(847) 259-1555.</li>
+        <li class="red"><span class="bullet">S.</span>Please text the letter R when you are ready with your bags, thank you!</li>
+        <li class="white"><span class="bullet">T.</span>We do not have any American Blue cabs available, would you like an American taxi instead?</li>
+        <li class="white"><span class="bullet">U.</span>You need to be on site for at least 10-15 minutes before i can approve your no load.</li>
+        <li><span>V.</span>Answer your phone?</li>
+        <li>W</li>
+        <li>X</li>
+        <li>Y</li>
+        <li>Z</li>
+    </ul>
+    
+   
+
+
+    <script>
+        const items = document.querySelectorAll('#items li');
+
+        document.addEventListener('keydown', (event) => {
+            const pressedKey = event.key.toUpperCase();
+            const itemIndex = pressedKey.charCodeAt(0) - 65;
+            if (itemIndex >= 0 && itemIndex < items.length) {
+                const text = items[itemIndex].textContent.substring(2);
+                copyToClipboard(text);
+            }
+        });
+
+        function copyToClipboard(text) {
+            const el = document.createElement('textarea');
+            el.value = text;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            console.log(`Copied "${text}" to clipboard!`);
+        }
+        
+       
+    </script>
+</body>
+</html>
